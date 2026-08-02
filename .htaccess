@@ -2,5 +2,10 @@
 # l'accès direct aux fichiers (css, js, images) qui restent chargeables normalement.
 Options -Indexes
 
-# Si quelqu'un essaie quand même de lister un dossier, on le renvoie vers l'accueil.
-ErrorDocument 403 /index.html
+# Si quelqu'un accède directement à un dossier (ex: /img/, /css/), on effectue une
+# vraie redirection (302) vers l'accueil, pour que l'URL et les chemins relatifs
+# (css/..., js/..., img/...) restent corrects après la redirection.
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)$ /index.html [R=302,L]
