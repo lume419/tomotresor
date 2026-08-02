@@ -81,7 +81,7 @@
   --surface: #1c2c30dd;
   --surface-strong: #1c2c30ee;
   --card-bg: #1c2c30;
-  --card-border: #2b4044;
+  --card-border: #155861;
   --shadow-ink: 0,0,0;
 
   --icon-bg: #23363a;
@@ -397,6 +397,7 @@ input[type="text"]:focus{ border-color: var(--grande); }
 }
 .stamp:active{ transform: scale(0.88) rotate(-4deg); }
 .card.done .stamp{ background: var(--grande); border-color: var(--grande); color:#fff; }
+[data-theme="dark"] .stamp{ border-color: #155861; }
 .icon-plate{
   flex:none; width:60px;height:60px; border-radius:14px; display:flex;align-items:center;justify-content:center;
   font-size: 28px; background: var(--icon-bg); border: 1px solid var(--icon-border);
