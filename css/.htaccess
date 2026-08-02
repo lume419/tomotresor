@@ -1,2 +1,2 @@
 Options -Indexes
-ErrorDocument 403 "403 Forbidden"
+ErrorDocument 403 /index.html

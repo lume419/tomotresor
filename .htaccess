@@ -2,5 +2,5 @@
 # l'accès direct aux fichiers (css, js, images) qui restent chargeables normalement.
 Options -Indexes
 
-# Renvoie une 403 propre si quelqu'un essaie quand même de lister un dossier.
-ErrorDocument 403 "403 Forbidden"
+# Si quelqu'un essaie quand même de lister un dossier, on le renvoie vers l'accueil.
+ErrorDocument 403 /index.html
