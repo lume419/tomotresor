@@ -280,7 +280,7 @@ header.top p{ margin:14px auto 0; max-width: 540px; color: var(--ink-soft); font
   text-align:center;
 }
 .price-stat-row .trophy{ font-size:18px; flex:none; }
-.price-stat-row b{ color: var(--grande); }
+.price-stat-row b{ color: #29aebf; }
 .price-stats-toggle{
   position:absolute; top:8px; right:8px;
   width:16px; height:16px; padding:0; border:none; border-radius:50%;
