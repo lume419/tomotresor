@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TomoTrésor</title>
+<link rel="icon" href="img/favicon.ico" sizes="any">
+<link rel="icon" type="image/webp" sizes="16x16" href="img/favicon-16x16.webp">
+<link rel="icon" type="image/webp" sizes="32x32" href="img/favicon-32x32.webp">
+<link rel="icon" type="image/webp" sizes="192x192" href="img/icon-192.webp">
+<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.webp">
+<script>
+  /* Applique le thème sauvegardé avant le rendu, pour éviter un flash de mauvaise couleur.
+     Utilise uniquement localStorage, aucun cookie. */
+  (function(){
+    try{
+      var saved = localStorage.getItem('tomodachi-theme');
+      var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if(theme === 'dark'){ document.documentElement.setAttribute('data-theme','dark'); }
+    }catch(e){}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="top-actions">
+  <div class="dropdown" id="saveDropdown">
+    <button class="theme-toggle" type="button" onclick="toggleSaveMenu()">💾 Sauvegarde ▾</button>
+    <div class="dropdown-menu" id="saveMenu">
+      <button class="dropdown-item" type="button" onclick="exportData()">⬇️ Sauvegarder</button>
+      <label class="dropdown-item dropdown-upload">
+        ⬆️ Importer une sauvegarde
+        <input type="file" id="importFile" accept=".txt" onchange="importData(event)" hidden>
+      </label>
+      <div class="dropdown-sep"></div>
+      <button class="dropdown-item dropdown-danger" type="button" onclick="openResetModal()">🔄 Réinitialiser</button>
+    </div>
+  </div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"></button>
+</div>
+
+<div class="page-bg" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="signboard">
+    <h1><img src="img/logo-icon.webp" alt="" class="title-icon"> TomoTrésor</h1>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="best-chance" id="bestChance"></div>
+  <div class="price-stats" id="priceStats" role="button" tabindex="0" onclick="togglePriceStats()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePriceStats();}"></div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="progress-card">
+    <div class="ring" id="ring" style="--pct:100; --ring-color: var(--grande);"><span id="ringPct">100%</span></div>
+    <div class="progress-info">
+      <div class="label" id="progLabel">—</div>
+      <div class="sub" id="progSub">—</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="🔎 Chercher un trésor…" oninput="render()">
+    <label class="switch">
+      <input type="checkbox" id="hideDone" onchange="render()">
+      <span class="switch-track"><span class="switch-thumb"></span></span>
+      <span class="switch-label">Masquer les trésors obtenus</span>
+    </label>
+  </div>
+
+  <div id="content"></div>
+  <div class="empty-msg" id="emptyMsg" style="display:none;"></div>
+
+  <div class="storage-note">
+    💾 Ta progression est enregistrée automatiquement dans le cache du navigateur de ce PC, si tu le vide tu perdra toutes tes données actuelles, pense a faire une backup.
+  </div>
+
+  <div class="modal-overlay" id="resetModal">
+    <div class="modal-box">
+      <h3>⚠️ Réinitialiser TomoTrésor ?</h3>
+      <p>Tous les trésors cochés et le classement personnalisé seront supprimés définitivement de ce navigateur. Ton choix de thème sera conservé.</p>
+      <p><b>Cette action est irréversible.</b> Pense à télécharger une sauvegarde avant, si besoin.</p>
+      <div class="modal-actions">
+        <button class="modal-btn modal-cancel" type="button" onclick="closeResetModal()">Annuler</button>
+        <button class="modal-btn modal-confirm" type="button" onclick="confirmReset()">Oui, tout supprimer</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Données © Nintendo · Tomodachi Life: Une vie de rêve. Site non officiel, à usage personnel.</footer>
+
+<script src="js/data.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
