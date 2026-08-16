@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /img/img_catalogue/
+
+Sitemap: https://tomotresor.fr/sitemap.xml
