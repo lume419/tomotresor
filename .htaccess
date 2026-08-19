@@ -6,6 +6,12 @@ Options -Indexes
 # vraie redirection (302) vers l'accueil, pour que l'URL et les chemins relatifs
 # (css/..., js/..., img/...) restent corrects après la redirection.
 RewriteEngine On
+
+# Force HTTPS : toute requête en HTTP est redirigée (301, permanente) vers la
+# version HTTPS, pour éviter que Google/les visiteurs voient deux versions du site.
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
 RewriteCond %{REQUEST_URI} !^/$
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^(.*)$ / [R=302,L]
